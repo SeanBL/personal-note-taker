@@ -10,4 +10,4 @@ db.get('/', (req, res) => {
     readFromFile('./db/feedback.json').then((data) => res.json(JSON.parse(data)));
 });
 
-module.exports = db;
+module.exports = db; 
