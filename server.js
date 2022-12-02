@@ -50,6 +50,24 @@ app.post('/api/notes', (req, res) => {
     res.end();
 });
 
+app.delete('/api/notes/:id', (req, res) => {
+    const params = req.params.id;
+    console.log(params);
+    const existingNotesString = fs.readFileSync(userNotes, "utf8");
+    const existingNotes = JSON.parse(existingNotesString);
+
+    for (var i = 0; i < existingNotes.length; i++) {
+        if (existingNotes[i].id === params) {
+            existingNotes.splice(i, 1);
+        }
+    }
+    console.log(userNotes);
+
+    fs.writeFileSync(userNotes, JSON.stringify(existingNotes, null, 4));
+    res.end();
+
+});
+
 app.get('*', (req, res) => 
     res.sendFile(path.join(__dirname, '/public/index.html'))
 );
