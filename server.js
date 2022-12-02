@@ -26,7 +26,7 @@ app.get('/api/notes', (req, res) => {
     const existingNotesString = fs.readFileSync(userNotes, "utf8");
     const existingNotes = JSON.parse(existingNotesString);
     
-    
+    console.log(existingNotes);
     res.json(existingNotes);
     res.end();
 });
@@ -43,7 +43,7 @@ app.post('/api/notes', (req, res) => {
     existingNotes.push({
         title,
         text,
-        noteId: uuid(),
+        id: uuid(),
     });
 
     fs.writeFileSync(userNotes, JSON.stringify(existingNotes, null, 4));
