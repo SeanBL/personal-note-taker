@@ -16,6 +16,9 @@
 ## Installation
 To properly run this application, clone a copy of the repository from GitHub. Next, install inquirer by typing "npm install inqurier@8.2.4". In the terminal, navigate to the directory where the index.js file is located. In the terminal, type "node server.js". Copy the "localhost" url and paste it into the browser search bar. The home page should appear in the browser. Here is a link to the GitHub repository: https://github.com/SeanBL/personal-note-taker
 
+The user can also access the full application on Heroku. 
+Here is a link to the deployed application on heroku: https://personal-note-taker-11.herokuapp.com/
+
 ## Usage
 At the home page, the user can click on the "Get Started" button to access the note taking function. The user can input a note title with the body of the note. Once the user has finished writing the note, the user can click on the save icon in the top right corner to store the note on the left hand side of the page. The user can click on the note title on the left side to display the body of the note on the right side of the screen. The user can also click on the plus icon in the upper right hand corner to create a new note. The user can finally delete a note by clicking on any of the trash icons, located on the left side of the page.
  
