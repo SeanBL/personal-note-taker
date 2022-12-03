@@ -1,17 +1,15 @@
 const express = require('express');
 const path = require('path');
-const { readFromFile, readAndAppend } = require('./helpers/fsUtils');
 const fs = require('fs');
 const uuid = require('./helpers/uuid');
-const api = require('./routes/index');
-
 const PORT = process.env.PORT || 3001;
-
 const app = express();
+const userNotes = path.resolve(__dirname, "db", "db.json");
+const existingNotesString = fs.readFileSync(userNotes, "utf8");
+const existingNotes = JSON.parse(existingNotesString);
 
+// This middleware let's the api know 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 
 app.use(express.static('public'));
 
@@ -19,12 +17,7 @@ app.get('/notes', (req, res) =>
     res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
 
-
-const userNotes = path.resolve(__dirname, "db", "db.json");
-
 app.get('/api/notes', (req, res) => {
-    const existingNotesString = fs.readFileSync(userNotes, "utf8");
-    const existingNotes = JSON.parse(existingNotesString);
     
     console.log(existingNotes);
     res.json(existingNotes);
@@ -32,12 +25,9 @@ app.get('/api/notes', (req, res) => {
 });
 
 app.post('/api/notes', (req, res) => {
-    console.info(`${req.method} request received to add a review`);
 
     const { title, text } = req.body;
 
-    const existingNotesString = fs.readFileSync(userNotes, "utf8");
-    const existingNotes = JSON.parse(existingNotesString);
     console.log(existingNotes);
 
     existingNotes.push({
@@ -53,8 +43,6 @@ app.post('/api/notes', (req, res) => {
 app.delete('/api/notes/:id', (req, res) => {
     const params = req.params.id;
     console.log(params);
-    const existingNotesString = fs.readFileSync(userNotes, "utf8");
-    const existingNotes = JSON.parse(existingNotesString);
 
     for (var i = 0; i < existingNotes.length; i++) {
         if (existingNotes[i].id === params) {
